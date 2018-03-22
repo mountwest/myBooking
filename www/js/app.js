@@ -42,6 +42,11 @@ angular.module('starter', ['ionic'])
       {id: 110, size: 8, type: "Big", price: 299},
     ];
 
+    // API's for exchange 
+    //
+    // http://fixer.io/
+    // http://rest/.com/currency_convert
+
     $scope.exchangeRate = [
       {eur: 9.2},
       {usd: 7.2},
