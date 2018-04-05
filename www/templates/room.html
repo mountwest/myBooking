@@ -1,0 +1,62 @@
+<ion-view view-title="Booking">
+
+    <ion-content class="padding" ng-repeat="room in rooms | filter: {id: ID}">
+        
+        <h1 class="title">Room #{{room.id}}</h1>
+        <h2>{{room.size}} bed{{room.size>1 ? "s" : ""}}</h2>
+        <ion-card>
+            <ion-card-content>
+                <img ng-src="{{room.img}}" alt="" width="100%" max-height="50%">
+                <p>
+                    {{room.type}}
+                </p>
+
+                <h2>{{room.price}} SEK/night ( € {{ (room.price/exchange.rates.SEK).toFixed(2) }} )</h2>
+
+                <hr>
+                <form ng-submit="submit(data)" name="form" ng-controller="FormController">
+                    <div class="list">
+                        <label class="item item-input">
+                            <h3 class="col-50">Guests:</h3>
+                            <input class="col" type="number" placeholder="0" min="1" max="{{room.size}}" required name="guests" ng-model="data.guests">
+                        </label>
+                        <label class="item item-input">
+                            <h3 class="col-50">Start date:</h3>
+                            <input class="col" type="date" placeholder="" required name="startdate" ng-model="startdate" ng-change="startdateFormat(startdate)" min="{{today}}">
+                        </label>
+                        <label class="item item-input">
+                            <h3 class="col-50">End date:</h3>
+                            <input class="col" type="date" placeholder="" required name="enddate" ng-model="enddate" ng-change="enddateFormat(enddate)" min="{{data.startdate}}">
+                        </label>
+                        <label class="item item-input">
+                            <h3 class="col-50">First Name:</h3>
+                            <input class="col" type="text" placeholder="Ex. John" required name="firstname" ng-model="data.firstname">
+                        </label>
+                        <label class="item item-input">
+                            <h3 class="col-50">Last Name:</h3>
+                            <input class="col" type="text" placeholder="Ex. Doe" required name="lastname" ng-model="data.lastname">
+                        </label>
+                        <label class="item item-input">
+                            <h3 class="col-50">Email:</h3>
+                            <input class="col" type="text" placeholder="Ex. john.doe@email.com" required name="email" ng-model="data.email">
+                        </label>
+                        <div ng-show="form.email.$error.email" class="error center">
+                            Submit a Valid Email please!
+                        </div>
+                        <label class="item item-input">
+                            <h3 class="col-50">Phone Number:</h3>
+                            <input class="col" type="text" placeholder="+010 234 56 78" required name="phone" ng-model="data.phone">
+                        </label>
+                    </div>
+
+                    <h2 text-align-last="right">Total = {{room.price * diffDate(data)}}:- ( € {{ ((room.price * diffDate(data))/exchange.rates.SEK).toFixed(2) }} )</h2>
+
+                    <p>{{data}}</p>
+
+                    <input type="submit" name="submit" value="Submit" class="button button-block button-positive" ng-disabled="form.$invalid">
+                </form>
+            </ion-card-content>
+        </ion-card>
+
+    </ion-content>
+</ion-view>
