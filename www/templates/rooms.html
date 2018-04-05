@@ -3,8 +3,8 @@
     <ion-side-menus>
 
         <ion-side-menu side="left">
-            <ion-content padding center>
-                    <img ng-src="https://www.grandhotel.se/sites/all/themes/grandhotel/logo.png" alt="" width="100%" align-self="center">
+            <ion-content>
+                    <img ng-src="https://www.grandhotel.se/sites/all/themes/grandhotel/logo.png" alt="Sthlm" width="100%">
             </ion-content>
             <img ng-src="http://media2.ullerud.nu/2017/05/Slussen.jpg" alt="">
         </ion-side-menu>
@@ -16,7 +16,7 @@
 
                     <button menu-toggle="left" class="button button-icon icon ion-ios-information"></button>
 
-                    <h1 class="title">My Booking</h1>
+                    <h1 class="title">Sthlm B&B</h1>
 
                     <button menu-toggle="right" class="button button-icon icon ion-ios-settings"></button>
                 </div>
@@ -28,7 +28,7 @@
                     <ion-item class="item-thumbnail-left" ng-repeat="room in rooms" ng-src="{{rooms}}" ng-href="#/root/rooms/{{room.id}}">
                         <img ng-src="{{room.img}}" alt="">
                         <h2>{{room.size}} Bed{{room.size>1 ? "s" : ""}}</h2>
-                        <h3>{{room.price}} SEK/night ( € {{(room.price/exchange.rates.SEK).toFixed(2)}} )</h3>
+                        <h3>{{room.price}} SEK/night ( {{symbols[0][1]}} {{((room.price/exchange.rates.SEK)*exchange.rates.EUR).toFixed(2)}} )</h3>
                         <p>{{room.type}}</p>
                     </ion-item>
                 </ion-list>

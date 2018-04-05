@@ -82,15 +82,11 @@ angular.module('starter', ['ionic'])
       })
 
     $scope.symbols = [
-      {eur: "€"},
-      {usd: "$"},
+      ["EUR", "€"],
+      ["USD", "$"]
     ]
 
     console.log($scope.symbols[0]);
-
-    $scope.currencySelected = function (selected){
-      $scope.currency = $scope.symbols[selected];
-    }
 
   })
 
@@ -136,3 +132,34 @@ angular.module('starter', ['ionic'])
         })
     }
   })
+
+  .controller('PopupCtrl', function($scope, $ionicPopup) {
+
+    // When button is clicked, the popup will be shown...
+    $scope.showConfirm = function() {
+   
+             // Custom popup
+      var confirmPopup = $ionicPopup.show({
+        template: '<list><p><b>Check in:</b> {{data.startdate}}</p><p><b>Check out:</b> {{data.enddate}}</p><p><b>Reservee:</b> {{data.firstname}} {{data.lastname}}</p><p><b>Email:</b> {{data.email}}</p><p><b>Phone:</b> {{data.phone}}</p><hr><p>Room no. {{ID}} ({{room.price}} SEK/night)</p><p>Total cost = <b>{{room.price * diffDate(data)}}:- ( € {{ ((room.price * diffDate(data))/exchange.rates.SEK).toFixed(2) }} )</b></p></list>',
+        title: 'Reservation confirmed',
+        scope: $scope,
+     
+        buttons: [ {
+              text: '<b>Ok</b>',
+              type: 'button-positive',
+              onTap: function(e) {
+           
+        
+              }
+           }
+        ]
+     });
+
+ 
+       confirmPopup.then(function(res) {
+             console.log('Submitted');
+       });
+     
+    };
+ 
+ })

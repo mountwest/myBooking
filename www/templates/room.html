@@ -21,11 +21,11 @@
                             <input class="col" type="number" placeholder="0" min="1" max="{{room.size}}" required name="guests" ng-model="data.guests">
                         </label>
                         <label class="item item-input">
-                            <h3 class="col-50">Start date:</h3>
+                            <h3 class="col-50">Check in:</h3>
                             <input class="col" type="date" placeholder="" required name="startdate" ng-model="startdate" ng-change="startdateFormat(startdate)" min="{{today}}">
                         </label>
                         <label class="item item-input">
-                            <h3 class="col-50">End date:</h3>
+                            <h3 class="col-50">Check out:</h3>
                             <input class="col" type="date" placeholder="" required name="enddate" ng-model="enddate" ng-change="enddateFormat(enddate)" min="{{data.startdate}}">
                         </label>
                         <label class="item item-input">
@@ -51,9 +51,10 @@
 
                     <h2 text-align-last="right">Total = {{room.price * diffDate(data)}}:- ( € {{ ((room.price * diffDate(data))/exchange.rates.SEK).toFixed(2) }} )</h2>
 
-                    <p>{{data}}</p>
+                    <!-- <p>{{data}}</p> -->
 
-                    <input type="submit" name="submit" value="Submit" class="button button-block button-positive" ng-disabled="form.$invalid">
+                    <!-- <input type="submit" name="submit" value="Submit" class="button button-block button-positive" ng-disabled="form.$invalid"> -->
+                    <button ng-controller="PopupCtrl" class="button button-block button-positive" ng-click ="showConfirm()" ng-disabled="form.$invalid">Submit</button>
                 </form>
             </ion-card-content>
         </ion-card>
