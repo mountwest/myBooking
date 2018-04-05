@@ -74,19 +74,22 @@ angular.module('starter', ['ionic'])
       })
 
     $scope.ID = $stateParams.ID;
+    $scope.currency = "EUR";
+    $scope.rate = 1;
 
     $http.get('http://data.fixer.io/api/latest?access_key=70465cfb10a0683063762ffcd4dcbb40')
       .success(function (data) {
         $scope.exchange = data;
-        console.log(data);
+        $scope.currencies = Object.keys($scope.exchange.rates);
+        !$scope.rate ? $scope.rate = $scope.currencies.EUR : "";
       })
-
-    $scope.symbols = [
-      ["EUR", "€"],
-      ["USD", "$"]
-    ]
-
-    console.log($scope.symbols[0]);
+    
+    $scope.configCurrency = function (myCurrency) {
+      $scope.currency = myCurrency;
+      $scope.rate = $scope.exchange.rates[myCurrency];
+      console.log($scope.currency);
+      console.log($scope.rate);
+    }
 
   })
 

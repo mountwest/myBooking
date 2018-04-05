@@ -28,7 +28,7 @@
                     <ion-item class="item-thumbnail-left" ng-repeat="room in rooms" ng-src="{{rooms}}" ng-href="#/root/rooms/{{room.id}}">
                         <img ng-src="{{room.img}}" alt="">
                         <h2>{{room.size}} Bed{{room.size>1 ? "s" : ""}}</h2>
-                        <h3>{{room.price}} SEK/night ( {{symbols[0][1]}} {{((room.price/exchange.rates.SEK)*exchange.rates.EUR).toFixed(2)}} )</h3>
+                        <h3>{{room.price}} SEK/night ( {{currency}} {{((room.price/exchange.rates.SEK)*rate).toFixed(2)}} )</h3>
                         <p>{{room.type}}</p>
                     </ion-item>
                 </ion-list>
@@ -49,9 +49,9 @@
                         <div class="input-label">
                             Choose a currency
                         </div>
-                        <select name="currency" id="currency">
-                            <option value="0" selected="selected">EUR</option>
-                            <option value="1">USD</option>
+                        <select name="currency" id="currency" ng-model="myCurrency" ng-change="configCurrency(myCurrency)">
+                            <option selected="selected" value="">Select</option>
+                            <option ng-repeat="currency in currencies">{{currency}}</option>
                         </select>
                     </label>
                 </div>
